@@ -14,6 +14,7 @@ const LOCALES = {
   no: 'Norsk',
   pl: 'Polski',
   'pt-br': 'Português (Brasil)',
+  ru: 'Русский',
   sv: 'Svenska',
   uk: 'українська',
   vi: 'Tiếng Việt',
