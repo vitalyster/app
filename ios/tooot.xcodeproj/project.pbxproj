@@ -17,6 +17,7 @@
 		5EE088C926297820007E5FEC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EE088CB26297820007E5FEC /* InfoPlist.strings */; };
 		5EE44DD62600124E00A9BCED /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE44DD52600124E00A9BCED /* File.swift */; };
 		96905EF65AED1B983A6B3ABC /* libPods-tooot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-tooot.a */; };
+		D95BF87AF09C3544914B233A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9238A7525A7DE468538DB359 /* PrivacyInfo.xcprivacy */; };
 		E3BC22F5F8ABE515E14CF199 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D878F932AF7A9974E06E461 /* ExpoModulesProvider.swift */; };
 		E613A80B28282A01003C97D6 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = E613A80A28282A01003C97D6 /* AppDelegate.mm */; };
 		E633A42B281EAEAB000E540F /* ShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E633A420281EAEAB000E540F /* ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -66,6 +67,7 @@
 		5EE44DD52600124E00A9BCED /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		6C2E3173556A471DD304B334 /* Pods-tooot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tooot.debug.xcconfig"; path = "Target Support Files/Pods-tooot/Pods-tooot.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-tooot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tooot.release.xcconfig"; path = "Target Support Files/Pods-tooot/Pods-tooot.release.xcconfig"; sourceTree = "<group>"; };
+		9238A7525A7DE468538DB359 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = tooot/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		9D878F932AF7A9974E06E461 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-tooot/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = tooot/SplashScreen.storyboard; sourceTree = "<group>"; };
 		DF8133F098604A10B0D94952 /* boop.mp3 */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = boop.mp3; path = tooot/boop.mp3; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				5E36538225C9B8BD009F93EE /* RootViewColor.xcassets */,
 				5EE088CB26297820007E5FEC /* InfoPlist.strings */,
 				DF8133F098604A10B0D94952 /* boop.mp3 */,
+				9238A7525A7DE468538DB359 /* PrivacyInfo.xcprivacy */,
 			);
 			name = tooot;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
 				4986628FD0DD4630BFE5F388 /* boop.mp3 in Resources */,
+				D95BF87AF09C3544914B233A /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,13 +436,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-tooot/Pods-tooot-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants/EXConstants.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/RCTI18nStrings.bundle",
-				"${PODS_ROOT}/Sentry/Sources/Resources/PrivacyInfo.xcprivacy",
+				"${PODS_CONFIGURATION_BUILD_DIR}/Sentry/Sentry.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EXConstants.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RCTI18nStrings.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PrivacyInfo.xcprivacy",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Sentry.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
