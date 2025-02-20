@@ -3161,13 +3161,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/blur@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "@react-native-community/blur@npm:4.4.0"
+"@react-native-community/blur@npm:^4.4.1":
+  version: 4.4.1
+  resolution: "@react-native-community/blur@npm:4.4.1"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10/73083ea3a52431f45565bcc4aabacc46d1d2ef20250b67604f1f658841c702fbb53ec890404d052f6bba33738e47f0717a5b83c93e663d18b543b3151c986ee2
+  checksum: 10/6fa84036db480af765df08d680955e9b5acaa631a54678b8eef970799fc04bdc7f906cb06a94f2da9af097c52ddb56ca4cff2172372d1d5f7717864f43965e0a
   languageName: node
   linkType: hard
 
@@ -11184,7 +11184,7 @@ __metadata:
     "@react-native-async-storage/async-storage": "npm:~1.21.0"
     "@react-native-camera-roll/camera-roll": "npm:^7.4.0"
     "@react-native-clipboard/clipboard": "npm:^1.13.2"
-    "@react-native-community/blur": "npm:^4.4.0"
+    "@react-native-community/blur": "npm:^4.4.1"
     "@react-native-community/netinfo": "npm:^11.2.1"
     "@react-native-firebase/app": "npm:^18.8.0"
     "@react-native-menu/menu": "npm:^0.9.1"

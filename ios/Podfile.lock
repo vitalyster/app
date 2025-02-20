@@ -971,7 +971,7 @@ PODS:
   - React-Mapbuffer (0.73.11):
     - glog
     - React-debug
-  - react-native-blur (4.4.0):
+  - react-native-blur (4.4.1):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
@@ -1578,7 +1578,7 @@ SPEC CHECKSUMS:
   React-jsinspector: a98428936fb888cc15d857226a26d9ac0a668a0e
   React-logger: 6c1170f7bc315878ef4bd3b918e09130cf632798
   React-Mapbuffer: 41c166b84fc479afc78097cd51404109ec9edf68
-  react-native-blur: 799045500f56146afc46245148080e7b7623cb75
+  react-native-blur: b2b140d3d65077a1d5d26be62d9415f895592344
   react-native-cameraroll: ef70014f7f909cda1832aa250fa800b7d86db268
   react-native-image-picker: e8f292d7d7f04778cfd0fa91466ac66acea96b1a
   react-native-language-detection: f414937fa715108ab50a6269a3de0bcb95e4ceb0
