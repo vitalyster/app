@@ -21,6 +21,8 @@ export default (): ExpoConfig => ({
     googleServicesFile: './android/app/google-services.json'
   },
   plugins: [
+    'expo-localization',
+    'expo-secure-store',
     [
       'expo-notifications',
       {

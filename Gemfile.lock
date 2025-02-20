@@ -296,7 +296,6 @@ DEPENDENCIES
   fastlane-plugin-sentry
   fastlane-plugin-versioning_android
   fastlane-plugin-yarn
-  xcodeproj (< 1.26.0)
 
 RUBY VERSION
    ruby 2.6.10p210

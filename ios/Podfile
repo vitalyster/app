@@ -8,9 +8,7 @@ require Pod::Executable.execute_command('node', ['-p',
   )', __dir__]).strip
 
 platform :ios, '13.4'
-use_modular_headers!
 prepare_react_native_project!
-flipper_config = ENV['NO_FLIPPER'] == "1" ? FlipperConfiguration.disabled : FlipperConfiguration.enabled
 linkage = ENV['USE_FRAMEWORKS']
 if linkage != nil
   Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
@@ -26,7 +24,6 @@ target 'tooot' do
 
   use_react_native!(
     :path => config[:reactNativePath],
-    :flipper_configuration => FlipperConfiguration.disabled,
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
@@ -58,9 +55,6 @@ target 'tooot' do
 end
 
 target 'ShareExtension' do
-  use_react_native!(
-    :flipper_configuration => FlipperConfiguration.disabled
-  )
-
+  use_react_native!
   pod 'RNShareMenu', :path => '../node_modules/react-native-share-menu'
 end
