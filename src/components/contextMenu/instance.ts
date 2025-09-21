@@ -32,7 +32,7 @@ const menuInstance = ({
 
   const menus: ContextMenu = []
 
-  const instance = Linking.parse(status.uri).hostname
+  const instance = Linking.parse(status.url || status.uri).hostname
 
   if (instance && instance !== getAccountStorage.string('auth.domain')) {
     menus.push([
