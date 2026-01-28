@@ -12,7 +12,7 @@
     "start": "react-native start",
     "android": "react-native run-android",
     "phone": "react-native run-ios --device",
-    "iphone": "react-native run-ios --simulator 'iPhone 15 Pro'",
+    "iphone": "react-native run-ios --simulator 'iPhone 16e'",
     "ipad": "react-native run-ios --simulator 'iPad Pro (11-inch) (4th generation)'",
     "app:build": "bundle exec fastlane",
     "clean": "react-native-clean-project"
