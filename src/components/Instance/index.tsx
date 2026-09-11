@@ -73,6 +73,12 @@ const ComponentInstance: React.FC<Props> = ({
       const clientId = data.client_id
       const clientSecret = data.client_secret
 
+      console.log('[OAuth] App registered:', {
+        domain,
+        clientId,
+        clientSecret: clientSecret?.substring(0, 8) + '...'
+      })
+
       const discovery = { authorizationEndpoint: `https://${domain}/oauth/authorize` }
 
       const request = new AuthSession.AuthRequest({
@@ -84,23 +90,51 @@ const ComponentInstance: React.FC<Props> = ({
       })
       await request.makeAuthUrlAsync(discovery)
 
+      console.log('[OAuth] Starting auth:', {
+        domain,
+        clientId,
+        scopes: variables.scopes,
+        redirectUri,
+        usePKCE: !['pawoo.net'].includes(domain),
+        authUrl: request.url,
+        codeChallenge: request.codeChallenge,
+        codeVerifier: request.codeVerifier
+      })
+
       const promptResult = await request.promptAsync(discovery, await browserPackage())
 
+      console.log('[OAuth] Prompt result:', {
+        type: promptResult.type,
+        params: promptResult.params,
+        error: promptResult.error
+      })
+
       if (promptResult.type === 'success') {
+        const exchangeConfig = {
+          clientId,
+          clientSecret,
+          scopes: variables.scopes,
+          redirectUri,
+          code: promptResult.params.code,
+          extraParams: {
+            client_id: clientId,
+            client_secret: clientSecret,
+            grant_type: 'authorization_code',
+            ...(request.codeVerifier && { code_verifier: request.codeVerifier })
+          }
+        }
+        console.log('[OAuth] Exchange config:', {
+          ...exchangeConfig,
+          clientSecret: exchangeConfig.clientSecret?.substring(0, 8) + '...',
+          extraParams: {
+            ...exchangeConfig.extraParams,
+            client_secret: exchangeConfig.extraParams.client_secret?.substring(0, 8) + '...',
+            code_verifier: exchangeConfig.extraParams.code_verifier?.substring(0, 8) + '...'
+          }
+        })
+
         const { accessToken } = await AuthSession.exchangeCodeAsync(
-          {
-            clientId,
-            clientSecret,
-            scopes: variables.scopes,
-            redirectUri,
-            code: promptResult.params.code,
-            extraParams: {
-              client_id: clientId,
-              client_secret: clientSecret,
-              grant_type: 'authorization_code',
-              ...(request.codeVerifier && { code_verifier: request.codeVerifier })
-            }
-          },
+          exchangeConfig,
           { tokenEndpoint: `https://${variables.domain}/oauth/token` }
         )
         queryClient.clear()

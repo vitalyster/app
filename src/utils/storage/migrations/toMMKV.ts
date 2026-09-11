@@ -24,7 +24,7 @@ export async function migrateFromAsyncStorage(): Promise<void> {
     try {
       const value = await AsyncStorage.getItem(key)
 
-      if (value != null) {
+      if (value != null && value !== '') {
         switch (key) {
           case 'persist:app':
             const storeApp: LegacyApp = JSON.parse(value)
