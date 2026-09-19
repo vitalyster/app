@@ -5,11 +5,11 @@ import { Loading } from '@components/Loading'
 import { ParseHTML } from '@components/Parse'
 import RelativeTime from '@components/RelativeTime'
 import CustomText from '@components/Text'
-import { BlurView } from '@react-native-community/blur'
 import { RootStackScreenProps } from '@utils/navigation/navigators'
 import { useAnnouncementMutation, useAnnouncementQuery } from '@utils/queryHooks/announcement'
 import { StyleConstants } from '@utils/styles/constants'
 import { useTheme } from '@utils/styles/ThemeManager'
+import { BlurView } from 'expo-blur'
 import React, { useEffect, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import {
@@ -196,12 +196,7 @@ const ScreenAnnouncements: React.FC<RootStackScreenProps<'Screen-Announcements'>
   }
 
   return (
-    <BlurView
-      blurType={mode}
-      blurAmount={20}
-      style={{ flex: 1 }}
-      reducedTransparencyFallbackColor={colors.backgroundDefault}
-    >
+    <BlurView tint={mode} intensity={50} style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 1 }}>
         <FlatList
           horizontal

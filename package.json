@@ -30,7 +30,6 @@
     "@react-native-async-storage/async-storage": "2.2.0",
     "@react-native-camera-roll/camera-roll": "^7.4.0",
     "@react-native-clipboard/clipboard": "^1.13.2",
-    "@react-native-community/blur": "^4.4.1",
     "@react-native-community/netinfo": "12.0.1",
     "@react-native-firebase/app": "^18.8.0",
     "@react-native-menu/menu": "^2",
@@ -48,10 +47,12 @@
     "expo-asset": "~57.0.18",
     "expo-audio": "^57.0.5",
     "expo-auth-session": "~57.0.12",
+    "expo-blur": "~57.0.3",
     "expo-build-properties": "^57.0.21",
     "expo-constants": "~57.0.19",
     "expo-crypto": "~57.0.3",
     "expo-file-system": "^57.0.7",
+    "expo-font": "~57.0.4",
     "expo-haptics": "~57.0.3",
     "expo-image": "~57.0.5",
     "expo-linking": "~57.0.10",
@@ -94,14 +95,16 @@
     "react-native-web": "^0.21.2",
     "react-native-worklets": "0.10.1",
     "rn-placeholder": "^3.0.3",
-    "zeego": "^1.7.2"
+    "zeego": "^3"
+  },
+  "resolutions": {
+    "expo-constants": "~57.0.19"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@babel/preset-typescript": "^7.23.3",
     "@expo/config": "^57.0.0",
-    "@expo/metro-config": "~57.0",
     "@react-native-community/cli": "15.0.1",
     "@react-native-community/cli-platform-android": "15.0.1",
     "@react-native-community/cli-platform-ios": "15.0.1",
@@ -125,6 +128,13 @@
   "expo": {
     "install": {
       "exclude": []
+    },
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "exclude": [
+          "react-native-language-detection"
+        ]
+      }
     }
   }
 }

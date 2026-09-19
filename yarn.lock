@@ -2426,7 +2426,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/metro-config@npm:~57.0, @expo/metro-config@npm:~57.0.12":
+"@expo/metro-config@npm:~57.0.12":
   version: 57.0.12
   resolution: "@expo/metro-config@npm:57.0.12"
   dependencies:
@@ -3668,16 +3668,6 @@ __metadata:
     react: ">=16.0"
     react-native: ">=0.57.0"
   checksum: 10/5ad7a88c7aead93d8fb6aa4b8558fbc26653bfb2385dd444681beafe50cdb90415f9c762cbaf90bcf7182c9c17357c4bd42aa2979eda0cc5f868b6ab1d208421
-  languageName: node
-  linkType: hard
-
-"@react-native-community/blur@npm:^4.4.1":
-  version: 4.4.1
-  resolution: "@react-native-community/blur@npm:4.4.1"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: 10/6fa84036db480af765df08d680955e9b5acaa631a54678b8eef970799fc04bdc7f906cb06a94f2da9af097c52ddb56ca4cff2172372d1d5f7717864f43965e0a
   languageName: node
   linkType: hard
 
@@ -6520,6 +6510,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-blur@npm:~57.0.3":
+  version: 57.0.3
+  resolution: "expo-blur@npm:57.0.3"
+  peerDependencies:
+    expo: "*"
+    react: "*"
+    react-native: "*"
+  checksum: 10/fac64c2f40ec389dbeffdb4a2b60a7a53ed63bcb31113aa886694bf85d96329a4aeb844323382482ee833cfa52033d38c81a114db02407481b1769f69beec3df
+  languageName: node
+  linkType: hard
+
 "expo-build-properties@npm:^57.0.21":
   version: 57.0.21
   resolution: "expo-build-properties@npm:57.0.21"
@@ -6533,19 +6534,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-constants@npm:~57.0.18":
-  version: 57.0.18
-  resolution: "expo-constants@npm:57.0.18"
-  dependencies:
-    "@expo/env": "npm:~2.4.3"
-  peerDependencies:
-    expo: "*"
-    react-native: "*"
-  checksum: 10/6872d537ca8ac200e6d31d07451013f1a39c439ab320b6879a30526b51d42da57f4e6167e71bbf44f9c9a16bb4ecc95a71e621977195c1f0bd68bdf74566627f
-  languageName: node
-  linkType: hard
-
-"expo-constants@npm:~57.0.19, expo-constants@npm:~57.0.3":
+"expo-constants@npm:~57.0.19":
   version: 57.0.19
   resolution: "expo-constants@npm:57.0.19"
   dependencies:
@@ -11476,14 +11465,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sf-symbols-typescript@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "sf-symbols-typescript@npm:1.0.0"
-  checksum: 10/008ddfcadceb33ec29fb182104516234cc3f771254619696918481744bc28be51070f226859e4dfc2faf5f094dd8ca13e0364b2bb3d22e8cf044ce37f749df0b
-  languageName: node
-  linkType: hard
-
-"sf-symbols-typescript@npm:^2.2.0":
+"sf-symbols-typescript@npm:^2.0.0, sf-symbols-typescript@npm:^2.2.0":
   version: 2.2.0
   resolution: "sf-symbols-typescript@npm:2.2.0"
   checksum: 10/8623e148bf86151692d3ccb3149122c091b256162a39f4c4f78472811ffe92e3c77a83841a7381a5dc0bc6505ebb73e7ca8901cb077004872d7ee1cb4e5be9d4
@@ -11993,7 +11975,6 @@ __metadata:
     "@babel/plugin-proposal-optional-chaining": "npm:^7.21.0"
     "@babel/preset-typescript": "npm:^7.23.3"
     "@expo/config": "npm:^57.0.0"
-    "@expo/metro-config": "npm:~57.0"
     "@expo/react-native-action-sheet": "npm:^4.0.1"
     "@expo/vector-icons": "npm:^15.1.1"
     "@formatjs/intl-datetimeformat": "npm:^6.12.2"
@@ -12006,7 +11987,6 @@ __metadata:
     "@react-native-async-storage/async-storage": "npm:2.2.0"
     "@react-native-camera-roll/camera-roll": "npm:^7.4.0"
     "@react-native-clipboard/clipboard": "npm:^1.13.2"
-    "@react-native-community/blur": "npm:^4.4.1"
     "@react-native-community/cli": "npm:15.0.1"
     "@react-native-community/cli-platform-android": "npm:15.0.1"
     "@react-native-community/cli-platform-ios": "npm:15.0.1"
@@ -12040,10 +12020,12 @@ __metadata:
     expo-asset: "npm:~57.0.18"
     expo-audio: "npm:^57.0.5"
     expo-auth-session: "npm:~57.0.12"
+    expo-blur: "npm:~57.0.3"
     expo-build-properties: "npm:^57.0.21"
     expo-constants: "npm:~57.0.19"
     expo-crypto: "npm:~57.0.3"
     expo-file-system: "npm:^57.0.7"
+    expo-font: "npm:~57.0.4"
     expo-haptics: "npm:~57.0.3"
     expo-image: "npm:~57.0.5"
     expo-linking: "npm:~57.0.10"
@@ -12088,7 +12070,7 @@ __metadata:
     react-native-worklets: "npm:0.10.1"
     rn-placeholder: "npm:^3.0.3"
     typescript: "npm:~6.0"
-    zeego: "npm:^1.7.2"
+    zeego: "npm:^3"
   languageName: unknown
   linkType: soft
 
@@ -12710,19 +12692,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zeego@npm:^1.7.2":
-  version: 1.7.2
-  resolution: "zeego@npm:1.7.2"
+"zeego@npm:^3":
+  version: 3.0.6
+  resolution: "zeego@npm:3.0.6"
   dependencies:
     "@radix-ui/react-context-menu": "npm:^2.0.1"
     "@radix-ui/react-dropdown-menu": "npm:^2.0.1"
-    sf-symbols-typescript: "npm:^1.0.0"
+    sf-symbols-typescript: "npm:^2.0.0"
   peerDependencies:
-    "@react-native-menu/menu": "*"
+    "@react-native-menu/menu": 1.2.2
     react: "*"
     react-native: "*"
-    react-native-ios-context-menu: ^1.15.1
-  checksum: 10/0a2e8f5a8bd09a27af8a4e67f877c1ad44a827d784c1677c4b0ba451f2781a3b8ca48d61157ba55c7c4d9bfc050d4f8b4c7b5b61c566b141e46ef90bd07496a7
+    react-native-ios-context-menu: 3.1.0
+    react-native-ios-utilities: 5.1.2
+  checksum: 10/b03d3c51ab97c7a77e36e5f6865333bfd96b4cde6e974537ffea6455cd5474910be94be9dcfae37c22fb93a01c5ea27c61d66c3e6e5eb4d306677da8e1f3811f
   languageName: node
   linkType: hard
 
