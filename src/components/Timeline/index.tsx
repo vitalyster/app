@@ -149,6 +149,9 @@ const Timeline: React.FC<Props> = ({
       return fetchedNoticeHeight.value + 32
     }
   }, [])
+  const fetchedNoticeOffset = useAnimatedStyle(() => ({
+    top: -fetchedNoticeHeight.value - 16
+  }))
   const refetchedNoticeAnimate = useAnimatedStyle(() => ({
     transform: [
       {
@@ -331,11 +334,11 @@ const Timeline: React.FC<Props> = ({
           <Animated.View
             style={[
               {
-                top: -fetchedNoticeHeight.value - 16,
                 paddingVertical: StyleConstants.Spacing.S,
                 paddingHorizontal: StyleConstants.Spacing.M,
                 ...noticeDefaults
               },
+              fetchedNoticeOffset,
               fetchedNoticeAnimate
             ]}
             onLayout={({
