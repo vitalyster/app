@@ -2,7 +2,7 @@ import haptics from '@components/haptics'
 import { displayMessage } from '@components/Message'
 import { CameraRoll } from '@react-native-camera-roll/camera-roll'
 import { RootStackParamList } from '@utils/navigation/navigators'
-import * as FileSystem from 'expo-file-system'
+import * as FileSystem from 'expo-file-system/legacy'
 import i18next from 'i18next'
 import { Linking, PermissionsAndroid, Platform } from 'react-native'
 

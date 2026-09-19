@@ -1,3 +1,4 @@
+import React from 'react'
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import { NavigatorScreenParams, useNavigationState } from '@react-navigation/native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
@@ -62,7 +63,7 @@ export type RootStackParamList = {
     hideCounter?: boolean
   }
   'Screen-AccountSelection': {
-    component?: () => JSX.Element | undefined
+    component?: () => React.JSX.Element | undefined
     share?: { text?: string; media?: { uri: string; mime: string }[] }
   }
 }

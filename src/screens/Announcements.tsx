@@ -63,7 +63,7 @@ const ScreenAnnouncements: React.FC<RootStackScreenProps<'Screen-Announcements'>
         justifyContent: 'center'
       }}
     >
-      <Pressable style={StyleSheet.absoluteFillObject} onPress={() => navigation.goBack()} />
+      <Pressable style={StyleSheet.absoluteFill} onPress={() => navigation.goBack()} />
       <View
         style={{
           flexShrink: 1,
@@ -85,7 +85,7 @@ const ScreenAnnouncements: React.FC<RootStackScreenProps<'Screen-Announcements'>
           <Trans
             ns='screenAnnouncements'
             i18nKey='content.published'
-            components={[<RelativeTime time={item.published_at} />]}
+            components={[<RelativeTime key='time' time={item.published_at} />]}
           />
         </CustomText>
         <ScrollView

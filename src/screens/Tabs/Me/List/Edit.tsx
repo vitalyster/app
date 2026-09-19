@@ -20,7 +20,7 @@ const TabMeListEdit: React.FC<TabMeStackScreenProps<'Tab-Me-List-Edit'>> = ({
 }) => {
   const { t } = useTranslation(['common', 'screenTabs'])
 
-  const messageRef = useRef(null)
+  const messageRef = useRef<any>(null)
 
   const queryKeyLists: QueryKeyLists = ['Lists']
   const queryClient = useQueryClient()

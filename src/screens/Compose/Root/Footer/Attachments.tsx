@@ -83,7 +83,7 @@ const ComposeAttachments: React.FC<Props> = ({ accessibleRefAttachments }) => {
         {item.uploading ? (
           <View
             style={{
-              ...StyleSheet.absoluteFillObject,
+              ...StyleSheet.absoluteFill,
               justifyContent: 'center',
               alignItems: 'center',
               backgroundColor: colors.backgroundOverlayInvert
@@ -94,7 +94,7 @@ const ComposeAttachments: React.FC<Props> = ({ accessibleRefAttachments }) => {
         ) : (
           <View
             style={{
-              ...StyleSheet.absoluteFillObject,
+              ...StyleSheet.absoluteFill,
               justifyContent: 'space-between',
               alignContent: 'flex-end',
               alignItems: 'flex-end',

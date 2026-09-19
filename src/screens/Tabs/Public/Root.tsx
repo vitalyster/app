@@ -90,7 +90,7 @@ const Explore = ({ route: { key: page } }: { route: { key: 'Explore' } }) => {
   const [remoteActive, setRemoteActive] = useGlobalStorage.string('remote.active')
   const [remotes, setRemotes] = useGlobalStorage.object('remotes')
 
-  const flRef = useRef<FlatList>(null)
+  const flRef = useRef<FlatList>(null) as React.RefObject<FlatList>
   const queryKey: QueryKeyTimeline = [
     'Timeline',
     { page, ...(remoteActive && { domain: remoteActive }) }

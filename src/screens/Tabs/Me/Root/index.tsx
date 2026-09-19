@@ -21,7 +21,7 @@ const TabMeRoot: React.FC = () => {
     options: { enabled: !!accountActive, keepPreviousData: false }
   })
 
-  const scrollRef = useRef<Animated.ScrollView>(null)
+  const scrollRef = useRef<Animated.ScrollView>(null) as React.RefObject<Animated.ScrollView>
   useScrollToTop(scrollRef)
 
   const scrollY = useSharedValue(0)

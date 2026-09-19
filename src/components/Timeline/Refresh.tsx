@@ -57,8 +57,8 @@ const TimelineRefresh: React.FC<Props> = ({
   }
 
   const PREV_PER_BATCH = 1
-  const prevCache = useRef<(Mastodon.Status | Mastodon.Notification | Mastodon.Conversation)[]>()
-  const prevStatusId = useRef<Mastodon.Status['id']>()
+  const prevCache = useRef<(Mastodon.Status | Mastodon.Notification | Mastodon.Conversation)[] | undefined>(undefined)
+  const prevStatusId = useRef<Mastodon.Status['id'] | undefined>(undefined)
 
   const queryClient = useQueryClient()
   const { refetch, isFetched } = useTimelineQuery({ ...queryKey[1] })

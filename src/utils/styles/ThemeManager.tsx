@@ -20,11 +20,11 @@ const ManageThemeContext = createContext<ContextType>({
 export const useTheme = () => useContext(ManageThemeContext)
 
 const useColorSchemeDelay = (delay = 250) => {
-  const [colorScheme, setColorScheme] = React.useState(Appearance.getColorScheme())
+  const [colorScheme, setColorScheme] = React.useState<"light" | "dark" | null | undefined>(Appearance.getColorScheme() as "light" | "dark" | null)
   const onColorSchemeChange = React.useCallback(
     throttle(
       ({ colorScheme }) => {
-        setColorScheme(colorScheme)
+        setColorScheme(colorScheme === "unspecified" ? null : colorScheme)
       },
       delay,
       {

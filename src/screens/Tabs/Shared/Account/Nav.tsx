@@ -5,12 +5,12 @@ import { StyleConstants } from '@utils/styles/constants'
 import { useTheme } from '@utils/styles/ThemeManager'
 import React, { useContext } from 'react'
 import { StyleSheet, View } from 'react-native'
-import Animated, { Extrapolate, interpolate, useAnimatedStyle } from 'react-native-reanimated'
+import Animated, { Extrapolation, interpolate, SharedValue, useAnimatedStyle } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import AccountContext from './Context'
 
 export interface Props {
-  scrollY: Animated.SharedValue<number>
+  scrollY: SharedValue<number>
 }
 
 const AccountNav: React.FC<Props> = ({ scrollY }) => {
@@ -21,7 +21,7 @@ const AccountNav: React.FC<Props> = ({ scrollY }) => {
 
   const styleOpacity = useAnimatedStyle(() => {
     return {
-      opacity: interpolate(scrollY.value, [0, 200], [0, 1], Extrapolate.CLAMP)
+      opacity: interpolate(scrollY.value, [0, 200], [0, 1], Extrapolation.CLAMP)
     }
   })
 
@@ -30,7 +30,7 @@ const AccountNav: React.FC<Props> = ({ scrollY }) => {
       style={[
         styleOpacity,
         {
-          ...StyleSheet.absoluteFillObject,
+          ...StyleSheet.absoluteFill,
           zIndex: 99,
           backgroundColor: colors.backgroundDefault,
           height: headerHeight

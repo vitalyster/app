@@ -59,7 +59,7 @@ export type ComposeState = {
   replyToStatus?: Mastodon.Status
   textInputFocus: {
     current: 'text' | 'spoiler'
-    refs: { text: RefObject<TextInput>; spoiler: RefObject<TextInput> }
+    refs: { text: RefObject<TextInput | null>; spoiler: RefObject<TextInput | null> }
     isFocused: { text: MutableRefObject<boolean>; spoiler: MutableRefObject<boolean> }
   }
 }

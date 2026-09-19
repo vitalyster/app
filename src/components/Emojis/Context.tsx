@@ -5,7 +5,7 @@ type inputProps = {
   value: [string, (value: string) => void]
   selection: [{ start: number; end?: number }, (selection: { start: number; end?: number }) => void]
   isFocused: MutableRefObject<boolean>
-  ref: RefObject<TextInput> // For controlling focus
+  ref: RefObject<TextInput | null> // For controlling focus
   maxLength?: number
 }
 

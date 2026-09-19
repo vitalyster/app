@@ -73,7 +73,7 @@ const App: React.FC = () => {
         }
       }
 
-      log('log', 'App', `locale: ${Localization.locale}`)
+      log('log', 'App', `locale: ${(Localization.getLocales()[0]?.languageTag ?? "en")}`)
       const language = getLanguage()
       if (!language) {
         if (Platform.OS !== 'ios') {

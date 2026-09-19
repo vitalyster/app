@@ -54,7 +54,7 @@ const TabSharedToot: React.FC<TabSharedStackScreenProps<'Tab-Shared-Toot'>> = ({
   }, [hasRemoteContent])
 
   const PREV_PER_BATCH = 1
-  const ancestorsCache = useRef<(Mastodon.Status & { _level?: number })[]>()
+  const ancestorsCache = useRef<(Mastodon.Status & { _level?: number })[] | undefined>(undefined)
   const loaded = useRef<boolean>(false)
   const prependContent = async () => {
     await new Promise<void>(promise => setTimeout(promise, 128))

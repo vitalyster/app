@@ -16,7 +16,7 @@ const TabMePreferences: React.FC<TabMeStackScreenProps<'Tab-Me-Preferences'>> = 
   navigation
 }) => {
   const { t } = useTranslation('screenTabs')
-  const messageRef = useRef<FlashMessage>(null)
+  const messageRef = useRef<FlashMessage>(null) as React.RefObject<FlashMessage>
 
   const isNested =
     (useNavigationState(

@@ -156,7 +156,7 @@ const TabMe: React.FC = () => {
         })}
       />
 
-      {TabShared(Stack)}
+      {TabShared(Stack as any)}
     </Stack.Navigator>
   )
 }

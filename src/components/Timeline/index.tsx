@@ -90,7 +90,7 @@ const Timeline: React.FC<Props> = ({
       }
     })
 
-  const flRef = useRef<FlatList>(null)
+  const flRef = useRef<FlatList>(null) as React.RefObject<FlatList>
   const isFetchingPrev = useSharedValue<boolean>(false)
   const [fetchedCount, setFetchedCount] = useState<number | null>(null)
   const fetchedNoticeHeight = useSharedValue<number>(100)
@@ -271,7 +271,7 @@ const Timeline: React.FC<Props> = ({
     flRef.current?.scrollToOffset({ offset: 0, animated: false })
   )
 
-  const noticeDefaults: StyleProp<Animated.AnimateStyle<StyleProp<ViewStyle>>> = {
+  const noticeDefaults: StyleProp<ViewStyle> = {
     position: 'absolute',
     alignSelf: 'center',
     borderRadius: 99,

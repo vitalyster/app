@@ -1,17 +1,17 @@
 import { useAccessibility } from '@utils/accessibility/AccessibilityManager'
 import { StyleConstants } from '@utils/styles/constants'
-import { Text, TextProps, TextStyle } from 'react-native'
+import { StyleProp, Text, TextProps, TextStyle } from 'react-native'
 
 type Props =
   | {
-      style?: Omit<TextStyle, 'fontSize' | 'lineHeight' | 'fontWeight'>
+      style?: StyleProp<Omit<TextStyle, 'fontSize' | 'lineHeight' | 'fontWeight'>>
       fontStyle?: undefined
       fontSize?: 'S' | 'M' | 'L'
       lineHeight?: 'S' | 'M' | 'L'
       fontWeight?: 'Normal' | 'Bold'
     }
   | {
-      style?: Omit<TextStyle, 'fontSize' | 'lineHeight' | 'fontWeight'>
+      style?: StyleProp<Omit<TextStyle, 'fontSize' | 'lineHeight' | 'fontWeight'>>
       fontStyle: 'S' | 'M' | 'L'
       fontSize?: undefined
       lineHeight?: undefined

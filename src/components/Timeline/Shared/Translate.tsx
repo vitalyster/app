@@ -38,8 +38,8 @@ const TimelineTranslate = () => {
 
   const settingsLanguage = getLanguage()
   const targetLanguage = settingsLanguage?.startsWith('en')
-    ? Localization.locale || settingsLanguage || 'en'
-    : settingsLanguage || Localization.locale || 'en'
+    ? (Localization.getLocales()[0]?.languageTag ?? "en") || settingsLanguage || 'en'
+    : settingsLanguage || (Localization.getLocales()[0]?.languageTag ?? "en") || 'en'
 
   const [enabled, setEnabled] = useState(false)
   const { refetch, data, isFetching, isSuccess, isError } = useTranslateQuery({
@@ -64,7 +64,7 @@ const TimelineTranslate = () => {
   }
   if (
     Platform.OS === 'ios' &&
-    Localization.locale.slice(0, 2).includes(detected.language.slice(0, 2))
+    (Localization.getLocales()[0]?.languageTag ?? "en").slice(0, 2).includes(detected.language.slice(0, 2))
   ) {
     return devView()
   }

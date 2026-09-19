@@ -8,8 +8,8 @@ import ComposeRootHeader from './Header'
 import ComposeRootSuggestion from './Suggestions'
 
 const ComposeRoot = () => {
-  const accessibleRefDrafts = useRef(null)
-  const accessibleRefAttachments = useRef(null)
+  const accessibleRefDrafts = useRef<any>(null)
+  const accessibleRefAttachments = useRef<any>(null)
 
   useEffect(() => {
     const tagDrafts = findNodeHandle(accessibleRefDrafts.current)

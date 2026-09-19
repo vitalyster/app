@@ -5,13 +5,17 @@ export const storage: { global: MMKV; account?: MMKV } = { global: new MMKV(), a
 
 export const secureStorage = createSecureStore()
 
-// Clear keychain on fresh install (MMKV wiped but keychain persists)
-const appInstalled = storage.global.getBoolean('app.installed')
-if (!appInstalled) {
-  try {
-    secureStorage.clear()
-  } catch {}
-  storage.global.set('app.installed', true)
+// Clear Keychain on fresh install (MMKV wiped but Keychain persists).
+// Wrapped in try/catch since secureStorage might not be fully initialized
+// at module load time (e.g. if its internal MMKV isn't ready yet).
+try {
+  const appInstalled = storage.global.getBoolean('app.installed')
+  if (!appInstalled) {
+    secureStorage.removeItem('persist:instances').catch(() => {})
+    storage.global.set('app.installed', true)
+  }
+} catch {
+  // secureStorage not ready yet — will be cleared on next cold boot
 }
 
 export const GLOBAL: { connect?: boolean } = {

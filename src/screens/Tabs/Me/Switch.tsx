@@ -15,7 +15,7 @@ const TabMeSwitch: React.FC = () => {
   const { colors } = useTheme()
   const accounts = getReadableAccounts()
 
-  const scrollViewRef = useRef<ScrollView>(null)
+  const scrollViewRef = useRef<ScrollView>(null) as React.RefObject<ScrollView>
   useEffect(() => {
     setTimeout(() => scrollViewRef.current?.scrollToEnd({ animated: true }), 150)
   }, [scrollViewRef.current])
