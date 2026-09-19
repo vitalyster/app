@@ -8,6 +8,7 @@ import CustomText from '@components/Text'
 import * as Sentry from '@sentry/react-native'
 import apiInstance from '@utils/api/instance'
 import apiTooot, { TOOOT_API_DOMAIN } from '@utils/api/tooot'
+import { fromByteArray } from '@utils/base64'
 import { PUSH_ADMIN, PUSH_DEFAULT, setChannels } from '@utils/push/constants'
 import { updateExpoToken } from '@utils/push/updateExpoToken'
 import { useAppsQuery } from '@utils/queryHooks/apps'
@@ -21,7 +22,6 @@ import * as Notifications from 'expo-notifications'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AppState, Linking, Platform, ScrollView, View } from 'react-native'
-import { fromByteArray } from 'react-native-quick-base64'
 
 export const getPushPath = ({
   expoToken,

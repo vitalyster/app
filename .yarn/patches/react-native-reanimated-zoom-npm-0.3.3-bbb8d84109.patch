@@ -1,38 +1,30 @@
 diff --git a/src/zoom.tsx b/src/zoom.tsx
-index 70ce1c8d6a43e711f06b93d1eda3b44a3ad9a659..cdc2713470f2d332b8bf3e9c97e38fd9b78281df 100644
+index 70ce1c8d6a43e711f06b93d1eda3b44a3ad9a659..68948e3476eb60058a2eebde044c6f9413ee0186 100644
 --- a/src/zoom.tsx
 +++ b/src/zoom.tsx
-@@ -4,6 +4,7 @@ import Animated, {
-   useSharedValue,
-   useAnimatedStyle,
-   useDerivedValue,
-+  withDecay,
-   withTiming,
-   cancelAnimation,
-   runOnJS,
-@@ -120,11 +121,22 @@ export function Zoom(props: Props) {
-           }
-         }
-       })
--      .onEnd(() => {
-+      .onEnd((event) => {
-         if (isPinching.value || !isZoomed.value) return;
+@@ -224,17 +224,22 @@ export function Zoom(props: Props) {
+     simultaneousGesture,
+   ]);
  
--        panTranslateX.value = 0;
--        panTranslateY.value = 0;
-+        const maxTranslateX = (viewWidth.value / 2) * scale.value - viewWidth.value / 2;
-+        const minTranslateX = -maxTranslateX;
-+        translationX.value = withDecay({
-+          velocity: event.velocityX,
-+          clamp: [minTranslateX, maxTranslateX]
-+        });
++  // Read the callbacks outside of the worklet: capturing the whole context would make Worklets
++  // serialize the gesture object it holds (Gesture.Native()), which it cannot copy.
++  const onListZoomBegin = zoomListContext?.onZoomBegin;
++  const onListZoomEnd = zoomListContext?.onZoomEnd;
 +
-+        const maxTranslateY = (viewHeight.value / 2) * scale.value - viewHeight.value / 2;
-+        const minTranslateY = -maxTranslateY;
-+        translationY.value = withDecay({
-+          velocity: event.velocityY,
-+          clamp: [minTranslateY, maxTranslateY]
-+        });
-       });
+   useDerivedValue(() => {
+     if (scale.value > 1 && !isZoomed.value) {
+       isZoomed.value = true;
+-      if (zoomListContext) runOnJS(zoomListContext.onZoomBegin)();
++      if (onListZoomBegin) runOnJS(onListZoomBegin)();
+       if (onZoomBegin) runOnJS(onZoomBegin)();
+     } else if (scale.value === 1 && isZoomed.value) {
+       isZoomed.value = false;
+-      if (zoomListContext) runOnJS(zoomListContext.onZoomEnd)();
++      if (onListZoomEnd) runOnJS(onListZoomEnd)();
+       if (onZoomEnd) runOnJS(onZoomEnd)();
+     }
+-  }, [zoomListContext, onZoomBegin, onZoomEnd]);
++  }, [onListZoomBegin, onListZoomEnd, onZoomBegin, onZoomEnd]);
  
-     const pinch = Gesture.Pinch()
+   const style = useAnimatedStyle(() => {
+     return {

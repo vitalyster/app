@@ -3886,13 +3886,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-menu/menu@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "@react-native-menu/menu@npm:1.2.2"
+"@react-native-menu/menu@npm:^2":
+  version: 2.0.0
+  resolution: "@react-native-menu/menu@npm:2.0.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10/fb04035dae832c703bfa7e8f75c3950b7b71923c9f7d079c4482940f3e9239db7db232b1d03cbb75f1a923e9989cbebfb843c1a21469f1fc5fcc745d56239253
+  checksum: 10/547830a473b408cb5218298eb0e8892968ce9e2e7ff35eaef3a5e60985a19a0bd2d782bd010baed50d5f1b3beadca5ac24991a7df0b164e3d90865cd1792a2aa
   languageName: node
   linkType: hard
 
@@ -10632,19 +10632,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-quick-base64@npm:^2.0.8":
-  version: 2.0.8
-  resolution: "react-native-quick-base64@npm:2.0.8"
-  dependencies:
-    base64-js: "npm:^1.5.1"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: 10/783c42dd1b3701e211c8afe54781889f113b7fb71fcf5b923313a61368a42be52ec0654e8f34e3e51a8fb6c62a1c7ec7491216631c77177986d3ed52d18111f6
-  languageName: node
-  linkType: hard
-
-"react-native-reanimated-zoom@npm:^0.3.3":
+"react-native-reanimated-zoom@npm:0.3.3":
   version: 0.3.3
   resolution: "react-native-reanimated-zoom@npm:0.3.3"
   peerDependencies:
@@ -10653,6 +10641,18 @@ __metadata:
     react-native-gesture-handler: "*"
     react-native-reanimated: "*"
   checksum: 10/a2e91956d32c3ad859a5c6c1f83eeb50b5f9adcc658717faba2f15fff56eeb14fb7d256ceeed0b0ea95eead8c4a8131f72246f54f0d6e871f119e11d045f273b
+  languageName: node
+  linkType: hard
+
+"react-native-reanimated-zoom@patch:react-native-reanimated-zoom@npm%3A0.3.3#~/.yarn/patches/react-native-reanimated-zoom-npm-0.3.3-bbb8d84109.patch":
+  version: 0.3.3
+  resolution: "react-native-reanimated-zoom@patch:react-native-reanimated-zoom@npm%3A0.3.3#~/.yarn/patches/react-native-reanimated-zoom-npm-0.3.3-bbb8d84109.patch::version=0.3.3&hash=300167"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-gesture-handler: "*"
+    react-native-reanimated: "*"
+  checksum: 10/f02cd9495017e083027b65ab90d38ba49beade39f22fbcf1007d8b3d138010d40bac2cdbdb16ad639ef8116496e139db32af81f37580ac779b1167f1e2290f82
   languageName: node
   linkType: hard
 
@@ -12012,7 +12012,7 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:15.0.1"
     "@react-native-community/netinfo": "npm:12.0.1"
     "@react-native-firebase/app": "npm:^18.8.0"
-    "@react-native-menu/menu": "npm:^1.2.2"
+    "@react-native-menu/menu": "npm:^2"
     "@react-native-segmented-control/segmented-control": "npm:2.5.7"
     "@react-native/metro-config": "npm:^0.73.5"
     "@react-native/typescript-config": "npm:^0.74.0"
@@ -12077,9 +12077,8 @@ __metadata:
     react-native-language-detection: "npm:^0.2.2"
     react-native-mmkv: "npm:3.3.3"
     react-native-pager-view: "npm:8.0.2"
-    react-native-quick-base64: "npm:^2.0.8"
     react-native-reanimated: "npm:4.5.1"
-    react-native-reanimated-zoom: "npm:^0.3.3"
+    react-native-reanimated-zoom: "patch:react-native-reanimated-zoom@npm%3A0.3.3#~/.yarn/patches/react-native-reanimated-zoom-npm-0.3.3-bbb8d84109.patch"
     react-native-safe-area-context: "npm:~5.7"
     react-native-screens: "npm:~4.26"
     react-native-svg: "npm:15.15.4"
