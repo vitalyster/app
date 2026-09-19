@@ -81,7 +81,7 @@ export default (): ExpoConfig => ({
   },
   plugins: [
     'expo-localization',
-    '@sentry/react-native',
+    ['@sentry/react-native', { organization: 'tooot', project: 'app' }],
     'expo-image',
     [
       'expo-splash-screen',
@@ -94,6 +94,8 @@ export default (): ExpoConfig => ({
     'expo-web-browser',
     'expo-secure-store',
     ['expo-build-properties', { ios: { deploymentTarget: '16.4' } }],
+    ['./plugins/withPodsDeploymentTarget', { deploymentTarget: '16.4' }],
+    './plugins/withSceneLifecycle',
     [
       'expo-notifications',
       {
@@ -105,6 +107,7 @@ export default (): ExpoConfig => ({
     [
       'expo-share-intent',
       {
+        iosShareExtensionBundleIdentifier: 'com.xmflsct.app.tooot.ShareExtension',
         iosActivationRules: {
           NSExtensionActivationSupportsImageWithMaxCount: 4,
           NSExtensionActivationSupportsMovieWithMaxCount: 1,
