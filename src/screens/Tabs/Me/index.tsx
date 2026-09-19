@@ -27,7 +27,7 @@ const TabMe: React.FC = () => {
   const { t } = useTranslation('screenTabs')
 
   return (
-    <Stack.Navigator screenOptions={{ headerShadowVisible: false, headerBackTitleVisible: false }}>
+    <Stack.Navigator screenOptions={{ headerShadowVisible: false, headerTitleAlign: 'center', headerBackTitleVisible: false }}>
       <Stack.Screen
         name='Tab-Me-Root'
         component={TabMeRoot}

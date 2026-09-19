@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator<TabPublicStackParamList>()
 const TabPublic: React.FC = () => {
   usePopToTop('Tab-Public-Root')
   return (
-    <Stack.Navigator screenOptions={{ headerShadowVisible: false, headerBackTitleVisible: false }}>
+    <Stack.Navigator screenOptions={{ headerShadowVisible: false, headerTitleAlign: 'center', headerBackTitleVisible: false }}>
       <Stack.Screen name='Tab-Public-Root' component={Root} />
       {TabShared(Stack as any)}
     </Stack.Navigator>

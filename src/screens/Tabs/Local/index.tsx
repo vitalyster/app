@@ -15,6 +15,7 @@ const TabLocal: React.FC = () => {
     <Stack.Navigator
       screenOptions={{
         headerShadowVisible: false,
+        headerTitleAlign: 'center',
         headerBackTitleVisible: false,
         headerLeft: ({ canGoBack }) => (canGoBack ? <HeaderLeft /> : null)
       }}
