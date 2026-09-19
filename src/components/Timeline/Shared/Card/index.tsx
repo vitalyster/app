@@ -14,7 +14,6 @@ import { StyleConstants } from '@utils/styles/constants'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Pressable, View } from 'react-native'
-import TimelineDefault from '../../Default'
 import StatusContext from '../Context'
 import { CardNeodb } from './Neodb'
 
@@ -89,6 +88,8 @@ const TimelineCard: React.FC = () => {
 
   const cardContent = () => {
     if (match?.status && foundStatus) {
+      // Lazy require: Default renders Card, so a top-level import would create a require cycle
+      const TimelineDefault: typeof import('../../Default').default = require('../../Default').default
       return <TimelineDefault item={foundStatus} disableDetails disableOnPress />
     }
     if (match?.account && foundAccount) {
