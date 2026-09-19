@@ -80,7 +80,7 @@ export const Filter: React.FC<Props> = ({ onPress, filter, button, style }) => {
                 ns='screenTabs'
                 i18nKey='me.preferencesFilters.context'
                 components={[
-                  <>
+                  <Fragment key='contexts'>
                     {filter.context.map((c, index) => (
                       <Fragment key={index}>
                         <CustomText
@@ -90,7 +90,7 @@ export const Filter: React.FC<Props> = ({ onPress, filter, button, style }) => {
                         <CustomText children={t('common:separator')} />
                       </Fragment>
                     ))}
-                  </>
+                  </Fragment>
                 ]}
               />
             }

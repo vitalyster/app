@@ -240,7 +240,7 @@ const TimelinePoll: React.FC = () => {
             <Trans
               ns='componentTimeline'
               i18nKey='shared.poll.meta.expiration.until'
-              components={[<RelativeTime time={poll.expires_at} />]}
+              components={[<RelativeTime key='time' time={poll.expires_at} />]}
             />
           </>
         )

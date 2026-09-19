@@ -83,11 +83,13 @@ const TabShared = (
                 i18nKey='shared.attachments.name'
                 components={[
                   <ParseEmojis
+                    key='name'
                     content={account.display_name || account.username}
                     emojis={account.emojis}
                     fontBold
                   />,
                   <CustomText
+                    key='text'
                     fontStyle='M'
                     style={{ color: colors.primaryDefault }}
                     fontWeight='Bold'

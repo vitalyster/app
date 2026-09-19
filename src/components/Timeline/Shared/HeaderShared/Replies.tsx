@@ -35,7 +35,7 @@ const HeaderSharedReplies: React.FC = () => {
         ns='componentTimeline'
         i18nKey='shared.header.shared.replies'
         components={[
-          <>
+          <Fragment key='mentions'>
             {excludeMentions.current.map((mention, index) => (
               <Fragment key={index}>
                 {index > 0 ? t('common:separator') : null}
@@ -51,7 +51,7 @@ const HeaderSharedReplies: React.FC = () => {
                 />
               </Fragment>
             ))}
-          </>
+          </Fragment>
         ]}
       />
     </CustomText>

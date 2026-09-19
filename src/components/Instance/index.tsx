@@ -105,8 +105,8 @@ const ComponentInstance: React.FC<Props> = ({
 
       console.log('[OAuth] Prompt result:', {
         type: promptResult.type,
-        params: promptResult.params,
-        error: promptResult.error
+        params: (promptResult as any).params,
+        error: (promptResult as any).error
       })
 
       if (promptResult.type === 'success') {
@@ -115,7 +115,7 @@ const ComponentInstance: React.FC<Props> = ({
           clientSecret,
           scopes: variables.scopes,
           redirectUri,
-          code: promptResult.params.code,
+          code: (promptResult as any).params.code,
           extraParams: {
             client_id: clientId,
             client_secret: clientSecret,
@@ -133,10 +133,26 @@ const ComponentInstance: React.FC<Props> = ({
           }
         })
 
-        const { accessToken } = await AuthSession.exchangeCodeAsync(
-          exchangeConfig,
-          { tokenEndpoint: `https://${variables.domain}/oauth/token` }
-        )
+        const tokenResponse = await fetch(`https://${variables.domain}/oauth/token`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Accept: 'application/json'
+          },
+          body: new URLSearchParams({
+            grant_type: 'authorization_code',
+            client_id: clientId,
+            client_secret: clientSecret,
+            redirect_uri: redirectUri,
+            code: exchangeConfig.code,
+            ...(request.codeVerifier && { code_verifier: request.codeVerifier })
+          }).toString()
+        })
+        const tokenText = await tokenResponse.text()
+        if (!tokenResponse.ok) {
+          throw new Error(`Token request failed: ${tokenResponse.status} ${tokenText.substring(0, 200)}`)
+        }
+        const { access_token: accessToken } = JSON.parse(tokenText)
         queryClient.clear()
 
         const {
@@ -419,11 +435,13 @@ const ComponentInstance: React.FC<Props> = ({
                 i18nKey='server.terms.base'
                 components={[
                   <CustomText
+                    key='privacy-policy'
                     accessible
                     style={{ color: colors.blue }}
                     onPress={async () => openLink('https://tooot.app/privacy-policy')}
                   />,
                   <CustomText
+                    key='terms-of-service'
                     accessible
                     style={{ color: colors.blue }}
                     onPress={async () => openLink('https://tooot.app/terms-of-service')}

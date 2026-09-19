@@ -38,7 +38,7 @@ const TimelineFooter: React.FC<Props> = ({ queryKey, disableInfinity }) => {
             ns='componentTimeline'
             i18nKey='end.message'
             components={[
-              <Icon name='coffee' size={StyleConstants.Font.Size.S} color={colors.secondary} />
+              <Icon key='icon' name='coffee' size={StyleConstants.Font.Size.S} color={colors.secondary} />
             ]}
           />
         </CustomText>
