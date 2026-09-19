@@ -99,7 +99,7 @@ const HeaderRight: React.FC<Props> = ({
         backgroundColor: background ? colors.backgroundOverlayDefault : undefined,
         minHeight: 44,
         minWidth: 44,
-        marginRight: native ? -StyleConstants.Spacing.S : StyleConstants.Spacing.S,
+        marginRight: native ? 0 : StyleConstants.Spacing.S,
         ...(type === undefined && { borderRadius: 99 }),
         ...(type === 'text' && {
           paddingHorizontal: StyleConstants.Spacing.S
