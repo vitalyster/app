@@ -2,14 +2,15 @@ import Button from '@components/Button'
 import GracefullyImage from '@components/GracefullyImage'
 import { useAccessibility } from '@utils/accessibility/AccessibilityManager'
 import { connectMedia } from '@utils/api/helpers/connect'
-import { useGlobalStorage } from '@utils/storage/actions'
 import { StyleConstants } from '@utils/styles/constants'
 import { useTheme } from '@utils/styles/ThemeManager'
-import { ResizeMode, Video, VideoFullscreenUpdate } from 'expo-av'
-import { Platform } from 'expo-modules-core'
+import { useVideoPlayer, VideoView, VideoSource } from 'expo-video'
+import { useEventListener } from 'expo'
+import { Platform } from 'react-native'
 import * as ScreenOrientation from 'expo-screen-orientation'
-import React, { useContext, useRef, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { Pressable, View } from 'react-native'
+import { useGlobalStorage } from '@utils/storage/actions'
 import StatusContext from '../Context'
 import AttachmentAltText from './AltText'
 import { aspectRatio } from './dimensions'
@@ -34,26 +35,51 @@ const AttachmentVideo: React.FC<Props> = ({
   const { reduceMotionEnabled } = useAccessibility()
   const [shouldAutoplayGifv] = useGlobalStorage.boolean('app.auto_play_gifv')
 
-  const videoPlayer = useRef<Video>(null)
+  const videoRef = useRef<VideoView>(null)
   const [videoLoading, setVideoLoading] = useState(false)
-  const [videoLoaded, setVideoLoaded] = useState(false)
-  const [videoResizeMode, setVideoResizeMode] = useState<ResizeMode>(ResizeMode.COVER)
-  const playOnPress = async () => {
+
+  const player = useVideoPlayer(
+    sensitiveShown || !video.url ? null : ({ uri: video.remote_url || video.url } as VideoSource),
+    p => {
+      p.loop = !gifv
+      p.muted = gifv
+    }
+  )
+
+  useEffect(() => {
+    if (sensitiveShown) return
+    if (gifv && !reduceMotionEnabled && shouldAutoplayGifv) {
+      player.play()
+    } else {
+      player.pause()
+    }
+  }, [player, gifv, reduceMotionEnabled, shouldAutoplayGifv, sensitiveShown])
+
+  const playOnPress = useCallback(async () => {
     setVideoLoading(true)
-    if (!videoLoaded) {
-      await videoPlayer.current?.loadAsync(
-        connectMedia({
-          uri: video.url.includes('/media_proxy/') ? video.remote_url : video.url
-        }) as any
-      )
+    try {
+      if (gifv) {
+        player.playing ? player.pause() : player.play()
+      } else {
+        await videoRef.current?.enterFullscreen()
+        Platform.OS === 'android' && (await ScreenOrientation.unlockAsync())
+        player.play()
+      }
+    } catch {
+      player.play()
     }
     setVideoLoading(false)
+  }, [gifv, player])
 
-    Platform.OS === 'android' && setVideoResizeMode(ResizeMode.CONTAIN)
-    await videoPlayer.current?.presentFullscreenPlayer()
+  useEventListener(player, 'playToEnd', () => {
+    if (gifv) player.replay()
+  })
 
-    videoPlayer.current?.playAsync()
-  }
+  // Determine content fit (resize mode equivalent)
+  const contentFit = Platform.OS === 'android' ? 'contain' : 'cover'
+  const posterSource = video.preview_url && !gifv
+    ? connectMedia({ uri: video.preview_url })
+    : null
 
   return (
     <View
@@ -67,51 +93,17 @@ const AttachmentVideo: React.FC<Props> = ({
         overflow: 'hidden'
       }}
     >
-      <Video
-        accessibilityLabel={video.description}
-        ref={videoPlayer}
-        style={{ width: '100%', height: '100%', opacity: sensitiveShown ? 0 : 1 }}
-        usePoster
-        resizeMode={videoResizeMode}
-        {...(gifv
-          ? {
-              shouldPlay: reduceMotionEnabled || !shouldAutoplayGifv ? false : true,
-              isMuted: true,
-              isLooping: true,
-              source: connectMedia({ uri: video.url }) as { uri: string }
-            }
-          : {
-              posterSource: connectMedia({ uri: video.preview_url }),
-              posterStyle: { resizeMode: ResizeMode.COVER }
-            })}
-        useNativeControls={false}
-        onFullscreenUpdate={async ({ fullscreenUpdate }) => {
-          switch (fullscreenUpdate) {
-            case VideoFullscreenUpdate.PLAYER_DID_PRESENT:
-              Platform.OS === 'android' && (await ScreenOrientation.unlockAsync())
-              break
-            case VideoFullscreenUpdate.PLAYER_WILL_DISMISS:
-              Platform.OS === 'android' &&
-                (await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT))
-              Platform.OS === 'android' && setVideoResizeMode(ResizeMode.COVER)
-              if (gifv && !reduceMotionEnabled && shouldAutoplayGifv) {
-                videoPlayer.current?.playAsync()
-              } else {
-                videoPlayer.current?.pauseAsync()
-              }
-              break
-          }
-        }}
-        onPlaybackStatusUpdate={event => {
-          if (event.isLoaded) {
-            !videoLoaded && setVideoLoaded(true)
-
-            if (event.didJustFinish) {
-              videoPlayer.current?.setPositionAsync(0)
-            }
-          }
-        }}
+      <VideoView
+        ref={videoRef}
+        style={{ width: '100%', height: '100%' }}
+        player={player}
+        contentFit={contentFit}
+        nativeControls={!sensitiveShown && !gifv}
+        fullscreenOptions={{ enable: !gifv }}
+        allowsPictureInPicture={!gifv}
       />
+
+      {/* Overlay for controls and content */}
       <Pressable
         style={{
           position: 'absolute',
@@ -146,6 +138,8 @@ const AttachmentVideo: React.FC<Props> = ({
         ) : null}
         <AttachmentAltText sensitiveShown={sensitiveShown} text={video.description} />
       </Pressable>
+
+      {/* GIF label for GIFv videos */}
       {gifv && !shouldAutoplayGifv ? (
         <Button
           style={{

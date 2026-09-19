@@ -4,8 +4,8 @@ import { Slider } from '@sharcoux/slider'
 import { connectMedia } from '@utils/api/helpers/connect'
 import { StyleConstants } from '@utils/styles/constants'
 import { useTheme } from '@utils/styles/ThemeManager'
-import { Audio } from 'expo-av'
-import React, { useCallback, useContext, useEffect, useRef, useState } from 'react'
+import { useAudioPlayer, useAudioPlayerStatus } from 'expo-audio'
+import React, { useCallback, useContext, useEffect, useRef } from 'react'
 import { AppState, AppStateStatus, View } from 'react-native'
 import StatusContext from '../Context'
 import AttachmentAltText from './AltText'
@@ -22,42 +22,24 @@ const AttachmentAudio: React.FC<Props> = ({ total, index, sensitiveShown, audio 
   const { inThread } = useContext(StatusContext)
   const { colors } = useTheme()
 
-  const [audioPlayer, setAudioPlayer] = useState<Audio.Sound>()
-  const [audioPlaying, setAudioPlaying] = useState(false)
-  const [audioPosition, setAudioPosition] = useState(0)
-  const playAudio = useCallback(async () => {
-    if (!audioPlayer) {
-      const { sound } = await Audio.Sound.createAsync(
-        connectMedia({ uri: audio.url }) as { uri: string },
-        {},
-        // @ts-ignore
-        props => setAudioPosition(props.positionMillis)
-      )
-      setAudioPlayer(sound)
-    } else {
-      await audioPlayer.setPositionAsync(audioPosition)
-      audioPlayer.playAsync()
-      setAudioPlaying(true)
-    }
-  }, [audioPlayer, audioPosition])
-  const pauseAudio = useCallback(async () => {
-    audioPlayer!.pauseAsync()
-    setAudioPlaying(false)
-  }, [audioPlayer])
+  const audioPlayer = useAudioPlayer(connectMedia({ uri: audio.url }) as { uri: string })
+  const audioStatus = useAudioPlayerStatus(audioPlayer)
+  const audioPlaying = audioStatus.playing
+  const audioPosition = audioStatus.currentTime * 1000
+  const playAudio = useCallback(() => audioPlayer.play(), [audioPlayer])
+  const pauseAudio = useCallback(() => audioPlayer.pause(), [audioPlayer])
 
   const appState = useRef(AppState.currentState)
   useEffect(() => {
-    const appState = AppState.addEventListener('change', _handleAppStateChange)
+    const sub = AppState.addEventListener('change', (nextAppState: AppStateStatus) => {
+      if (appState.current.match(/active/) && nextAppState.match(/inactive/)) {
+        audioPlayer.pause()
+      }
+      appState.current = nextAppState
+    })
 
-    return () => appState.remove()
-  }, [])
-  const _handleAppStateChange = async (nextAppState: AppStateStatus) => {
-    if (appState.current.match(/active/) && nextAppState.match(/inactive/)) {
-      await audioPlayer?.stopAsync()
-    }
-
-    appState.current = nextAppState
-  }
+    return () => sub.remove()
+  }, [audioPlayer])
 
   return (
     <View
@@ -134,13 +116,8 @@ const AttachmentAudio: React.FC<Props> = ({ total, index, sensitiveShown, audio 
             value={audioPosition}
             minimumTrackTintColor={colors.secondary}
             maximumTrackTintColor={colors.disabled}
-            onSlidingStart={() => {
-              audioPlayer?.pauseAsync()
-              setAudioPlaying(false)
-            }}
-            onSlidingComplete={value => {
-              setAudioPosition(value)
-            }}
+            onSlidingStart={() => audioPlayer.pause()}
+            onSlidingComplete={value => audioPlayer.seekTo(value / 1000)}
             enabled={true}
             thumbSize={StyleConstants.Spacing.M}
             thumbTintColor={colors.primaryOverlay}
