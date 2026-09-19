@@ -131,19 +131,27 @@ private_lane :build_android_apk do
   sh "mv #{lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]} #{File.expand_path('..', Dir.pwd)}/tooot-#{GITHUB_RELEASE}.apk"
 end
 
+desc "Generate the native project (ios/ and android/ are not tracked)"
+private_lane :prebuild do |options|
+  sh("cd .. && npx expo prebuild --platform #{options[:platform]} --no-install")
+end
+
 lane :ios do
+  prebuild(platform: "ios")
   cocoapods(clean_install: true, podfile: "./ios/Podfile")
   build_ios
   rocket
 end
 
 lane :android do
+  prebuild(platform: "android")
   build_android
   rocket
 end
 
 lane :release do
   if ENVIRONMENT == 'release'
+    prebuild(platform: "android")
     build_android_apk
     set_github_release(
       repository_name: GITHUB_REPO,
