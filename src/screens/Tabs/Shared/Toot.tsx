@@ -114,9 +114,12 @@ const TabSharedToot: React.FC<TabSharedStackScreenProps<'Tab-Shared-Toot'>> = ({
   })
 
   const match = urlMatcher(toot.url || toot.uri)
+  // Skip the remote lookup when the url is not a known status url (e.g. non-Mastodon servers)
   const remoteQueryEnabled =
     ['public', 'unlisted'].includes(toot.visibility) &&
-    match?.domain !== getAccountStorage.string('auth.domain')
+    !!match?.domain?.length &&
+    !!match.status?.id?.length &&
+    match.domain !== getAccountStorage.string('auth.domain')
   const query = useQuery<{
     pages: { body: (Mastodon.Status & { _level?: number })[] }[]
   }>(
