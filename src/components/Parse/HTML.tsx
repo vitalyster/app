@@ -218,14 +218,7 @@ const ParseHTML: React.FC<Props> = ({
             )
             break
           case 'br':
-            return (
-              <Text
-                key={index}
-                style={{ lineHeight: adaptedLineheight ? adaptedLineheight / 2 : undefined }}
-              >
-                {'\n\n'}
-              </Text>
-            )
+            return <Text key={index}>{'\n'}</Text>
           case 'p':
             if (index < document.children.length - 1) {
               return (
