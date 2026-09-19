@@ -23,11 +23,11 @@ import { setGlobalStorage, useGlobalStorage } from '@utils/storage/actions'
 import { useTheme } from '@utils/styles/ThemeManager'
 import { themes } from '@utils/styles/themes'
 import { addScreenshotListener } from 'expo-screen-capture'
+import { ShareIntent, useShareIntent } from 'expo-share-intent'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IntlProvider } from 'react-intl'
 import { Alert, Platform, StatusBar } from 'react-native'
-import ShareMenu from 'react-native-share-menu'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -82,18 +82,9 @@ const Screens: React.FC = () => {
   useLinking()
 
   // Share Extension
-  const handleShare = (
-    item?:
-      | {
-          data: { mimeType: string; data: string }[]
-          mimeType: undefined
-        }
-      | { data: string | string[]; mimeType: string }
-  ) => {
+  const { hasShareIntent, shareIntent, resetShareIntent } = useShareIntent()
+  const handleShare = (item: ShareIntent) => {
     if (!accountActive) {
-      return
-    }
-    if (!item || !item.data) {
       return
     }
 
@@ -140,30 +131,9 @@ const Screens: React.FC = () => {
       }
     }
 
-    switch (Platform.OS) {
-      case 'ios':
-        if (!Array.isArray(item.data) || !item.data) {
-          return
-        }
-
-        for (const d of item.data) {
-          if (typeof d !== 'string') {
-            filterMedia({ uri: d.data, mime: d.mimeType })
-          }
-        }
-        break
-      case 'android':
-        if (!item.mimeType) {
-          return
-        }
-        if (Array.isArray(item.data)) {
-          for (const d of item.data) {
-            filterMedia({ uri: d, mime: item.mimeType })
-          }
-        } else {
-          filterMedia({ uri: item.data, mime: item.mimeType })
-        }
-        break
+    text = item.webUrl || item.text || undefined
+    for (const file of item.files || []) {
+      filterMedia({ uri: file.path, mime: file.mimeType })
     }
 
     if (!text && !media.length) {
@@ -183,14 +153,11 @@ const Screens: React.FC = () => {
     }
   }
   useEffect(() => {
-    ShareMenu.getInitialShare(handleShare)
-  }, [])
-  useEffect(() => {
-    const listener = ShareMenu.addNewShareListener(handleShare)
-    return () => {
-      listener.remove()
+    if (hasShareIntent) {
+      handleShare(shareIntent)
+      resetShareIntent()
     }
-  }, [])
+  }, [hasShareIntent, shareIntent])
 
   return (
     <IntlProvider locale={i18n.language}>
