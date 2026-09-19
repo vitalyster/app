@@ -47,7 +47,7 @@ const TabNotifications: React.FC = () => {
   usePopToTop('Tab-Notifications-Root')
 
   return (
-    <Stack.Navigator screenOptions={{ headerShadowVisible: false }}>
+    <Stack.Navigator screenOptions={{ headerShadowVisible: false, headerBackTitleVisible: false }}>
       <Stack.Screen name='Tab-Notifications-Root' component={Root} />
       <Stack.Screen
         name='Tab-Notifications-Filters'

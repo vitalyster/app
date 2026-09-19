@@ -13,7 +13,11 @@ const TabLocal: React.FC = () => {
 
   return (
     <Stack.Navigator
-      screenOptions={{ headerShadowVisible: false, headerLeft: () => <HeaderLeft /> }}
+      screenOptions={{
+        headerShadowVisible: false,
+        headerBackTitleVisible: false,
+        headerLeft: ({ canGoBack }) => (canGoBack ? <HeaderLeft /> : null)
+      }}
     >
       <Stack.Screen name='Tab-Local-Root' component={Root} />
       {TabShared(Stack as any)}
