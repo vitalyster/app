@@ -21,7 +21,7 @@ module.exports = function (api) {
       process.env.NODE_ENV === 'production' || process.env.BABEL_ENV === 'production'
         ? ['transform-remove-console']
         : [],
-      ['react-native-reanimated/plugin']
+      ['react-native-worklets/plugin']
     )
   }
 }

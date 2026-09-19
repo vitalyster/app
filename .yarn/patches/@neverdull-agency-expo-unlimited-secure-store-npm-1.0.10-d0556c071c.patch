@@ -1,0 +1,10 @@
+diff --git a/src/storage.js b/src/storage.js
+index 7fcfba1ce7f9c33b8f9270a4125d84c0c52ab368..08ca22fc0be7496d4f3dbf493adbddcd1dd2f351 100644
+--- a/src/storage.js
++++ b/src/storage.js
+@@ -1,4 +1,4 @@
+-import * as FileSystem from 'expo-file-system';
++import * as FileSystem from 'expo-file-system/legacy';
+ import * as SecureStore from 'expo-secure-store';
+ 
+ import uuid from './uuid';

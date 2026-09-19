@@ -10,7 +10,6 @@ export default (): ExpoConfig => ({
   version,
   // @ts-ignore
   extra: { environment: process.env.ENVIRONMENT },
-  privacy: 'hidden',
   ios: {
     bundleIdentifier: 'com.xmflsct.app.tooot'
   },
@@ -22,12 +21,21 @@ export default (): ExpoConfig => ({
   },
   plugins: [
     'expo-localization',
+    '@sentry/react-native',
+    'expo-image',
+    'expo-splash-screen',
+    'expo-web-browser',
     'expo-secure-store',
     [
       'expo-notifications',
       {
         sounds: ['./assets/sounds/boop.mp3']
       }
-    ]
+    ],
+    // Configure expo-video plugin for PiP and background playback
+    ['expo-video', {
+      supportsPictureInPicture: true,
+      supportsBackgroundPlayback: false
+    }]
   ]
 })

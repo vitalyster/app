@@ -3,6 +3,9 @@
   "compilerOptions": {
     "resolveJsonModule": true,
     "baseUrl": "./",
+    "ignoreDeprecations": "6.0",
+    "types": [],
+    "strictFunctionTypes": false,
     "paths": {
       "@components/*": [
         "./src/components/*"
